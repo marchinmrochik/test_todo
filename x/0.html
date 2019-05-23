@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #game {
+        display: flex;
+        width: 306px;
+        flex-wrap: wrap;
+    }
+
+    .field {
+        border: 1px solid black;
+        height: 100px;
+        width: 100px;
+        text-align: center;
+        font-size: 90px;
+        color: red;
+    }
+</style>
+<body>
+
+    <div id="game">
+
+    </div>
+</body>
+<script>
+    var game = document.getElementById('game');
+    var checkStep = true;
+    var arr = {
+        x: [],
+        o: []
+    };
+
+    fieldDrawing();
+
+
+    function fieldDrawing() {
+        for (var num = 0; num < 9; num++) {
+            game.innerHTML += '<div class="field" data-id='+num+'></div>';
+        }
+    }
+
+    Array.prototype.forEach.call(document.getElementsByClassName('field'),function(el){
+        el.addEventListener('click', function (e) {
+            checkStep ? (
+                    this.innerText = 'X',
+                        arr.x.push(+this.dataset.id),
+                        checkStep = !checkStep,
+                        test(arr.x , 'player1')
+                )
+                :
+                (
+                    this.innerText = 'O',
+                        arr.o.push(+this.dataset.id),
+                        checkStep = !checkStep,
+                        test(arr.o, 'player2')
+                )
+
+        })
+    });
+
+    function test(arr, test) {
+        var combine = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
+
+        for (var key in combine) {
+            var chech = combine[key];
+            arr.includes(chech[0]) && arr.includes(chech[1]) && arr.includes(chech[2]) ? alert(test) : ""
+        }
+    }
+
+</script>
+</html>
