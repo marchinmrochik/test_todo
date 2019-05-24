@@ -5,7 +5,7 @@ class TodoForm extends Component {
     render() {
         return (
             <form onSubmit={this.props.submit}>
-                <input type="text" value={this.props.value} onChange={this.props.change}/>
+                <input type="text" value={this.props.value} onChange={this.props.change}  required="required" />
                 <button  type="submit" >add</button>
             </form>
         )
